@@ -1,0 +1,618 @@
+/* public/styles.css - Modern Light Theme */
+
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-primary: #fcecdc;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-modal: rgba(255, 255, 255, 0.98);
+  --accent-primary: #f44637;
+  --accent-secondary: #191919;
+  --accent-light: #ff6b5a;
+  --text-primary: #191919;
+  --text-secondary: #6b7280;
+  --border-color: rgba(25, 25, 25, 0.1);
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --shadow-light: rgba(25, 25, 25, 0.1);
+  --shadow-medium: rgba(25, 25, 25, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+main { 
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 32px 24px;
+}
+
+h1 { 
+  text-align: center; 
+  margin-bottom: 40px; 
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--accent-primary);
+  border-radius: 2px;
+}
+
+h2 {
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+h3 {
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+/* Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 40px;
+}
+
+/* Card Styling with Clean Modern Design */
+.box {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid var(--border-color);
+  box-shadow: 
+    0 4px 20px var(--shadow-light),
+    0 1px 3px var(--shadow-medium);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-primary);
+}
+
+.box:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 8px 30px var(--shadow-medium),
+    0 2px 8px var(--shadow-light);
+}
+
+/* Forms */
+.small-form { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+  margin-bottom: 20px; 
+}
+
+.small-form label { 
+  font-size: 0.9rem; 
+  display: flex; 
+  flex-direction: column;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.small-form input, 
+.small-form select { 
+  padding: 12px 16px; 
+  margin-top: 6px; 
+  border-radius: 10px; 
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.small-form input:focus, 
+.small-form select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(244, 70, 55, 0.1);
+}
+
+/* Remove number input spinners (arrows) in Chrome, Edge, Safari */
+.small-form input[type="number"]::-webkit-outer-spin-button,
+.small-form input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove number input spinners in Firefox */
+.small-form input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Dropdown Fix - Force dropdown to open downward */
+.small-form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.small-form select,
+.small-form select option {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Buttons */
+button {
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button:not(.delete-btn):not(.edit-btn):not(.btn-cancel) {
+  background: var(--accent-primary);
+  color: white;
+}
+
+button:not(.delete-btn):not(.edit-btn):not(.btn-cancel):hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(244, 70, 55, 0.3);
+}
+
+/* Action Buttons */
+.edit-btn {
+  background: var(--accent-secondary);
+  color: white;
+  padding: 8px 16px;
+  margin-right: 8px;
+  font-size: 0.8rem;
+}
+
+.delete-btn {
+  background: var(--danger);
+  color: white;
+  padding: 8px 16px;
+  font-size: 0.8rem;
+}
+
+.edit-btn:hover {
+  background: #2d2d2d;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(25, 25, 25, 0.3);
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+}
+
+.check-link { 
+  display: inline-block; 
+  margin-top: 16px; 
+  padding: 10px 16px; 
+  background: rgba(25, 25, 25, 0.05);
+  border-radius: 8px; 
+  text-decoration: none; 
+  color: var(--text-primary);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.check-link:hover {
+  background: rgba(25, 25, 25, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-light);
+}
+
+/* Having Section */
+.having { 
+  margin-top: 32px; 
+  background: var(--bg-card);
+  padding: 24px; 
+  border-radius: 16px; 
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px var(--shadow-light);
+}
+
+.result-area { 
+  margin-top: 20px; 
+}
+
+/* Tables */
+.data-table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  margin-top: 20px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--shadow-light);
+  border: 1px solid var(--border-color);
+}
+
+.data-table th, .data-table td { 
+  border: 1px solid var(--border-color); 
+  padding: 16px 12px; 
+  text-align: left; 
+}
+
+.data-table th { 
+  background: var(--accent-secondary);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.data-table tr {
+  transition: background-color 0.2s ease;
+}
+
+.data-table tbody tr:hover {
+  background: rgba(244, 70, 55, 0.05);
+}
+
+.data-table td {
+  color: var(--text-primary);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(25, 25, 25, 0.5);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+}
+
+/* Modal Specific Styling */
+.modal {
+  background: var(--bg-modal);
+  border-radius: 16px;
+  padding: 32px;
+  width: 90%;
+  max-width: 500px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 60px rgba(25, 25, 25, 0.2);
+  transform: translateY(50px);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.modal::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 8px;
+  right: 8px;
+  height: 3px;
+  background: var(--accent-primary);
+  border-radius: 16px 16px 0 0;
+  z-index: 1
+}
+
+#form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-overlay.show .modal {
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.close-modal:hover {
+  background: rgba(25, 25, 25, 0.1);
+  color: var(--text-primary);
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Modal Form Specific Styling */
+.modal-form label {
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.modal-form input,
+.modal-form select {
+  padding: 14px 16px;
+  margin-top: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.modal-form input:focus,
+.modal-form select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(244, 70, 55, 0.1);
+  transform: translateY(-1px);
+}
+
+.modal-form input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* Modal Actions - Better Button Styling */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.modal-actions button {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.modal-actions button[type="submit"] {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.modal-actions button[type="submit"]:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(244, 70, 55, 0.3);
+}
+
+.modal-actions button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-cancel {
+  background: rgba(25, 25, 25, 0.1);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-cancel:hover {
+  background: rgba(25, 25, 25, 0.15);
+}
+
+/* Action Column */
+.actions-col {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Loading States */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid var(--accent-primary);
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Notifications */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 16px 24px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 500;
+  z-index: 2000;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 20px var(--shadow-medium);
+}
+
+.notification.show {
+  transform: translateX(0);
+}
+
+.notification.success {
+  background: var(--success);
+}
+
+.notification.error {
+  background: var(--danger);
+}
+
+/* Back Link */
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-light);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .grid { 
+    grid-template-columns: 1fr; 
+    gap: 20px;
+  }
+  
+  main {
+    padding: 20px 16px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .box {
+    padding: 20px;
+  }
+  
+  .modal {
+    width: 95%;
+    padding: 24px;
+    margin: 20px;
+  }
+  
+  .actions-col {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .edit-btn, .delete-btn {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    margin: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .data-table {
+    font-size: 0.85rem;
+  }
+  
+  .data-table th, .data-table td {
+    padding: 10px 8px;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--border-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-light);
+}

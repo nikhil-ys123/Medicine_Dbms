@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Medicine & Supplier Management</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main>
+    <h1>Medicine & Supplier Dashboard</h1>
+
+    <div class="grid">
+      <!-- Medicine Box -->
+      <section class="box">
+        <h2>💊 Medicine</h2>
+        <form action="/add-medicine" method="POST" class="small-form">
+          <label>Medicine name
+            <input name="med_name" placeholder="e.g. Paracetamol 500mg" required>
+          </label>
+          <label>Quantity
+            <input name="quantity" type="number" min="0" placeholder="e.g. 100" required>
+          </label>
+          <label>Price (per pack)
+            <input name="price_prpk" type="number" step="0.01" min="0" placeholder="e.g. 25.50" required>
+          </label>
+          <button type="submit">Add Medicine</button>
+        </form>
+
+        <a class="check-link" href="/medicines">📋 View All Medicines</a>
+      </section>
+
+      <!-- Supplier Box -->
+      <section class="box">
+        <h2>🏪 Supplier</h2>
+        <form action="/add-supplier" method="POST" class="small-form">
+          <label>Name
+            <input name="supp_name" placeholder="e.g. Alpha Pharma" required>
+          </label>
+          <label>Address
+            <input name="supp_add" placeholder="e.g. Mumbai, Maharashtra" required>
+          </label>
+          <label>Contact
+            <input name="supp_contact" placeholder="e.g. 9999000001" required>
+          </label>
+          <button type="submit">Add Supplier</button>
+        </form>
+
+        <a class="check-link" href="/suppliers">📋 View All Suppliers</a>
+      </section>
+
+      <!-- Supplier_Medicine Box -->
+      <section class="box">
+        <h2>🔗 Supplier ↔ Medicine Link</h2>
+
+        <form action="/add-supplier-medicine" method="POST" class="small-form">
+          <label>Supplier
+            <select name="supp_id" required style="position: static;">
+              <option value="">-- select supplier --</option>
+              <% suppliers.forEach(s => { %>
+                <option value="<%= s.supp_id %>"><%= s.supp_name %></option>
+              <% }) %>
+            </select>
+          </label>
+
+          <label>Medicine
+            <select name="med_id" required style="position: static;">
+              <option value="">-- select medicine --</option>
+              <% medicines.forEach(m => { %>
+                <option value="<%= m.med_id %>"><%= m.med_name %></option>
+              <% }) %>
+            </select>
+          </label>
+
+          <button type="submit">Create Link</button>
+        </form>
+
+        
+        <a class="check-link" href="/supplier-medicines">📋 View All Links</a>
+      </section>
+    </div>
+
+    <!-- HAVING feature -->
+    <section class="having">
+      <h3>📊 Analytics: Suppliers with Multiple Medicines</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem;">
+        Find suppliers who supply more than one type of medicine
+      </p>
+      <button id="check-multi">🔍 Analyze Suppliers</button>
+      <div id="multi-result" class="result-area"></div>
+    </section>
+  </main>
+
+  <script src="/main.js"></script>
+</body>
+</html>

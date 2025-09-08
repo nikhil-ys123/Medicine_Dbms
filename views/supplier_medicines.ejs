@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Supplier-Medicine Links</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main>
+    <h1>🔗 Supplier-Medicine Links</h1>
+    
+    <div style="margin-bottom: 24px; text-align: center;">
+      <a href="/" style="color: var(--accent-cyan); font-weight: 500; text-decoration: none; font-size: 1.1rem;">
+        ← Back to Dashboard
+      </a>
+    </div>
+
+    <div class="box">
+      <h2>Active Supplier-Medicine Relationships</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+        This table shows which suppliers provide which medicines
+      </p>
+      
+      <% if (rows.length === 0) { %>
+        <p style="color: var(--text-secondary); text-align: center; padding: 40px; font-style: italic;">
+          No supplier-medicine links found. Create some links from the dashboard.
+        </p>
+      <% } else { %>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>🏪 Supplier</th>
+              <th>💊 Medicine</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% rows.forEach(r => { %>
+              <tr>
+                <td><%= r.supp_name %></td>
+                <td><%= r.med_name %></td>
+                <td class="actions-col">
+                  <form action="/delete-supplier-medicine" method="POST" style="margin: 0;">
+                    <input type="hidden" name="supp_id" value="<%= r.supp_id %>">
+                    <input type="hidden" name="med_id" value="<%= r.med_id %>">
+                    <button type="submit" class="delete-btn" 
+                            onclick="return confirm('Remove link between <%= r.supp_name %> and <%= r.med_name %>?')">
+                      🗑️ Remove Link
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } %>
+      
+      <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+        <p style="color: var(--text-secondary); font-size: 0.85rem; text-align: center;">
+          💡 Tip: When you edit a supplier's name, it automatically updates in all links above!
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script src="/main.js"></script>
+</body>
+</html>
